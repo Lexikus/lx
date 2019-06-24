@@ -16,8 +16,11 @@ endif()
 
 add_executable(${PROJECT_NAME}
     ${SOURCE_PATH}/main.cpp
-    ${SOURCE_PATH}/core/graphic/context.h ${SOURCE_PATH}/core/graphic/context.cpp
 )
+
+# Modules
+add_subdirectory(${SOURCE_PATH}/core)
+
 
 # glfw
 # lib requirements for linux: xorg-dev libglu1-mesa-dev
