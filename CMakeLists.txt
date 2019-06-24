@@ -12,9 +12,12 @@ set(CMAKE_CXX_STANDARD 17)
 project(${PROJECT_NAME} VERSION ${PROJECT_VERSION} LANGUAGES CXX)
 if (UNIX)
     target_compile_options(${PROJECT_NAME} PRIVATE -Werror -Wall -Wextra)
-endif (UNIX)
+endif()
 
-add_executable(${PROJECT_NAME} ${SOURCE_PATH}/main.cpp)
+add_executable(${PROJECT_NAME}
+    ${SOURCE_PATH}/main.cpp
+    ${SOURCE_PATH}/core/graphic/context.h ${SOURCE_PATH}/core/graphic/context.cpp
+)
 
 # glfw
 # lib requirements for linux: xorg-dev libglu1-mesa-dev
