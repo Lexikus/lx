@@ -1,10 +1,13 @@
 #include <iostream>
 #include <string>
+
 #include <glad/glad.h>
 
-#include "core/graphic/window.h"
+#include "core/graphic/program.h"
 #include "core/graphic/context.h"
 #include "core/graphic/shader.h"
+#include "core/graphic/window.h"
+#include "core/graphic/vertex_array.h"
 
 // settings
 const short WIDTH = 800;
@@ -24,13 +27,22 @@ int main() {
         return 1;
     }
 
-    Shader shader = { "assets/shaders/vert.vertex.glsl" };
-    if(!shader.is_valid()) {
-        std::cout << shader.get_error() << std::endl;
+    Shader vertex_shader = { "assets/shaders/vert.vertex.glsl" };
+    Shader fragment_shader = { "assets/shaders/frag.fragment.glsl" };
+
+    Program program = {
+        vertex_shader,
+        fragment_shader,
+    };
+
+    if(!program.is_valid()) {
+        std::cout << program.get_error() << std::endl;
     }
 
+    VertexArray vertex_array = {};
 
     while (!window.should_close()) {
+        program.bind();
 
         glClearColor(1.0f, 1.0f, 0, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);

@@ -4,8 +4,7 @@
 
 #include "shader.h"
 
-class Program
-{
+class Program {
 private:
     unsigned int id_ = 0;
     bool is_valid_ = true;
@@ -15,5 +14,8 @@ public:
     Program(Shader& vertex_shader, Shader& fragment_shader);
     void bind();
     void unbind();
+    bool is_valid();
+    const std::string& get_error();
+private:
     bool compile(Shader& vertex_shader, Shader& fragment_shader);
 };
