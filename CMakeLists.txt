@@ -10,9 +10,6 @@ set(VENDOR_PATH ${CURRENT_PATH}/vendor)
 set(CMAKE_CXX_STANDARD 17)
 
 project(${PROJECT_NAME} VERSION ${PROJECT_VERSION} LANGUAGES CXX)
-if (UNIX)
-    target_compile_options(${PROJECT_NAME} PRIVATE -Werror -Wall -Wextra)
-endif()
 
 add_executable(${PROJECT_NAME}
     ${SOURCE_PATH}/main.cpp
