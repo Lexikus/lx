@@ -15,7 +15,7 @@ const std::string& BufferElement::get_name() const {
     return name_;
 }
 
-unsigned int BufferElement::get_size() const {
+int32_t BufferElement::get_size() const {
     return size_;
 }
 

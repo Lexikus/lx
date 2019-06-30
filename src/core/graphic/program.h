@@ -16,6 +16,7 @@ public:
     void unbind() const;
     bool is_valid() const;
     const std::string& get_error() const;
+    unsigned int get_id() const;
 private:
     bool compile(Shader& vertex_shader, Shader& fragment_shader);
 };

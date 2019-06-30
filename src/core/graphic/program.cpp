@@ -62,3 +62,7 @@ bool Program::is_valid() const {
 const std::string& Program::get_error() const {
     return error_;
 }
+
+unsigned int Program::get_id() const {
+    return id_;
+}

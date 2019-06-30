@@ -19,10 +19,16 @@ const short WIDTH = 800;
 const short HEIGHT = 800;
 const std::string TITLE = "OPENGL";
 
-float vertices_triangle[] = {
-     1.0f,  1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-     1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
-    -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+int vertices_triangle[] = {
+     1,  1, 0,
+     1, -1, 0,
+    -1, -1, 0,
+};
+
+float vertices_color[] = {
+    1.0f, 0.0f, 0.0f, 1.0f,
+    0.0f, 1.0f, 0.0f, 1.0f,
+    0.0f, 0.0f, 1.0f, 1.0f,
 };
 
 int index_triangle[] = {
@@ -64,13 +70,18 @@ int main() {
     VertexArray vertex_array = {};
     vertex_array.bind();
 
-    DataBuffer data_buffer = {
+    DataBuffer data_buffer_position = {
         vertices_triangle,
         sizeof(vertices_triangle)
     };
 
+    DataBuffer data_buffer_color = {
+        vertices_color,
+        sizeof(vertices_color)
+    };
+
     BufferElement buffer_element_position = {
-        BufferDataType::Float3,
+        BufferDataType::Int3,
         "aPos"
     };
 
@@ -79,10 +90,11 @@ int main() {
         "aCol"
     };
 
-    data_buffer.add_layout(buffer_element_position);
-    data_buffer.add_layout(buffer_element_color);
+    data_buffer_position.add_layout(buffer_element_position);
+    data_buffer_color.add_layout(buffer_element_color);
 
-    data_buffer.configure();
+    data_buffer_position.configure_by_name(program.get_id());
+    data_buffer_color.configure_by_name(program.get_id());
 
     unsigned int ibo;
     glGenBuffers(1, &ibo);

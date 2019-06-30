@@ -1,6 +1,6 @@
 #include "buffer_data_type.h"
 
-unsigned int buffer_data_type_size(BufferDataType buffer_data_type){
+int buffer_data_type_size(BufferDataType buffer_data_type){
     switch (buffer_data_type) {
         case BufferDataType::Float: return 4;
         case BufferDataType::Float2: return 4 * 2;
@@ -36,7 +36,7 @@ unsigned int buffer_data_type_count(BufferDataType buffer_data_type) {
     return 0;
 }
 
-GLenum buffer_data_type_api_type(BufferDataType buffer_data_type) {
+unsigned int buffer_data_type_api_type(BufferDataType buffer_data_type) {
     switch (buffer_data_type) {
         case BufferDataType::Float: return GL_FLOAT;
         case BufferDataType::Float2: return GL_FLOAT;
