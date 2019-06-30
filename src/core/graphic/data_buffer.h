@@ -13,7 +13,7 @@ public:
     DataBuffer(const void* const data, unsigned int size);
     void bind() const;
     void unbind() const;
-    void add_layout(BufferElement buffer_element);
-    void configure() const;
+    void add_element(BufferElement buffer_element);
+    void configure_by_index() const;
     void configure_by_name(unsigned int program_id) const;
 };

@@ -1,0 +1,10 @@
+#pragma once
+
+class IndexBuffer {
+private:
+    unsigned int id_ = 0;
+public:
+    IndexBuffer(const void* const data, unsigned int size);
+    void bind() const;
+    void unbind() const;
+};

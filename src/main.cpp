@@ -13,26 +13,27 @@
 #include "core/graphic/buffer_data_type.h"
 #include "core/graphic/buffer_element.h"
 #include "core/graphic/data_buffer.h"
+#include "core/graphic/index_buffer.h"
 
 // settings
 const short WIDTH = 800;
 const short HEIGHT = 800;
 const std::string TITLE = "OPENGL";
 
-int vertices_triangle[] = {
-     1,  1, 0,
-     1, -1, 0,
-    -1, -1, 0,
+glm::vec3 vertices_triangle[] = {
+    { 1.0,  1.0, 0.0 },
+    { 1.0, -1.0, 0.0 },
+    {-1.0, -1.0, 0.0 },
 };
 
-float vertices_color[] = {
-    1.0f, 0.0f, 0.0f, 1.0f,
-    0.0f, 1.0f, 0.0f, 1.0f,
-    0.0f, 0.0f, 1.0f, 1.0f,
+glm::vec4 vertices_color[] = {
+    { 1.0f, 0.0f, 0.0f, 1.0f },
+    { 0.0f, 1.0f, 0.0f, 1.0f },
+    { 0.0f, 0.0f, 1.0f, 1.0f },
 };
 
-int index_triangle[] = {
-    0, 1, 2
+glm::ivec3 index_triangle[] = {
+    { 0, 1, 2 }
 };
 
 int main() {
@@ -81,7 +82,7 @@ int main() {
     };
 
     BufferElement buffer_element_position = {
-        BufferDataType::Int3,
+        BufferDataType::Float3,
         "aPos"
     };
 
@@ -90,16 +91,16 @@ int main() {
         "aCol"
     };
 
-    data_buffer_position.add_layout(buffer_element_position);
-    data_buffer_color.add_layout(buffer_element_color);
+    data_buffer_position.add_element(buffer_element_position);
+    data_buffer_color.add_element(buffer_element_color);
 
     data_buffer_position.configure_by_name(program.get_id());
     data_buffer_color.configure_by_name(program.get_id());
 
-    unsigned int ibo;
-    glGenBuffers(1, &ibo);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_triangle), index_triangle, GL_STATIC_DRAW);
+    IndexBuffer index_buffer = {
+        index_triangle,
+        sizeof(index_triangle)
+    };
 
     while (!window.should_close()) {
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -110,7 +111,6 @@ int main() {
         vertex_array.bind();
 
         glDrawElements(GL_TRIANGLES, 1000, GL_UNSIGNED_INT, 0);
-
 
         window.on_update();
     }

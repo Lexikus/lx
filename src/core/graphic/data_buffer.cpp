@@ -20,12 +20,12 @@ void DataBuffer::unbind() const {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void DataBuffer::add_layout(BufferElement buffer_element) {
+void DataBuffer::add_element(BufferElement buffer_element) {
     stride_ += buffer_element.get_size();
     layouts_.push_back(buffer_element);
 }
 
-void DataBuffer::configure() const {
+void DataBuffer::configure_by_index() const {
     glBindBuffer(GL_ARRAY_BUFFER, id_);
 
     unsigned int layout_position = 0;
