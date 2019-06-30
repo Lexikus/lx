@@ -5,21 +5,23 @@
 
 #include <GLFW/glfw3.h>
 
+Window::Window(std::string title, int width, int height):
+title_ { title }, width_ { width }, height_ { height } { }
+
 Window::~Window() {
     glfwDestroyWindow(window_);
 }
 
-bool Window::init(std::string title, int width, int height) {
+bool Window::init() {
     glfwInit();
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window_ = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);;
+    window_ = glfwCreateWindow(width_, height_, title_.c_str(), NULL, NULL);
 
     if (window_ == nullptr) {
-        std::cout << "FAILED to create a window" << std::endl;
         glfwTerminate();
         return false;
     }
@@ -46,26 +48,26 @@ bool Window::init(std::string title, int width, int height) {
     return true;
 }
 
-const GLFWwindow* const Window::get_window(){
+const GLFWwindow* const Window::get_window() const{
     return window_;
 }
 
-bool Window::should_close(){
+bool Window::should_close() const {
     return glfwWindowShouldClose(window_);
 }
 
-void Window::set_vsync(bool enable) {
+void Window::set_vsync(bool enable) const {
   if (enable)
     glfwSwapInterval(1);
   else
     glfwSwapInterval(0);
 }
 
-void Window::on_update() {
+void Window::on_update() const {
     glfwSwapBuffers(window_);
     glfwPollEvents();
 }
 
-void Window::terminate() {
+void Window::terminate() const {
     glfwTerminate();
 }

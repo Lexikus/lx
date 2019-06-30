@@ -13,12 +13,12 @@ private:
     bool is_valid_ = true;
 public:
     Shader(std::string shader_path, ShaderType type);
-    bool is_valid();
-    const std::string &get_error();
-    int get_id();
-    void destroy();
+    bool is_valid() const;
+    const std::string &get_error() const;
+    int get_id() const;
+    void destroy() const;
 private:
     std::string read_from_file(const std::string &path);
-    unsigned int create(const std::string &code, ShaderType type);
+    unsigned int create(const std::string &code, ShaderType type) const;
     bool compile(unsigned int id);
 };

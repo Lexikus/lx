@@ -11,8 +11,8 @@ private:
     std::vector<BufferElement> layouts_ = {};
 public:
     DataBuffer(float* data, unsigned int size);
-    void bind();
-    void unbind();
+    void bind() const;
+    void unbind() const;
     void add_layout(BufferElement buffer_element);
-    void configure();
+    void configure() const;
 };

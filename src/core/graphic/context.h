@@ -3,5 +3,5 @@
 class Context
 {
 public:
-    bool init();
+    bool init() const;
 };

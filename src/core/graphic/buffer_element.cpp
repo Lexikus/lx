@@ -5,7 +5,7 @@
 #include "buffer_data_type.h"
 
 BufferElement::BufferElement(BufferDataType type, std::string name, bool normalized):
-type_ { type },
+type_ { buffer_data_type_api_type(type) },
 name_ { name },
 size_ { buffer_data_type_size(type) },
 count_ { buffer_data_type_count(type) },
@@ -21,6 +21,10 @@ unsigned int BufferElement::get_size() const {
 
 unsigned int BufferElement::get_count() const {
     return count_;
+}
+
+GLenum BufferElement::get_type() const {
+    return type_;
 }
 
 bool BufferElement::is_normalized() const {

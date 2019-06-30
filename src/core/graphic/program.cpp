@@ -23,11 +23,11 @@ Program::Program(Shader& vertex_shader, Shader& fragment_shader) {
     is_valid_ = compile(vertex_shader, fragment_shader);
 }
 
-void Program::bind() {
+void Program::bind() const {
     glUseProgram(id_);
 }
 
-void Program::unbind() {
+void Program::unbind() const {
     glUseProgram(0);
 }
 
@@ -55,10 +55,10 @@ bool Program::compile(Shader& vertex_shader, Shader& fragment_shader) {
     return true;
 }
 
-bool Program::is_valid() {
+bool Program::is_valid() const {
     return is_valid_;
 }
 
-const std::string& Program::get_error() {
+const std::string& Program::get_error() const {
     return error_;
 }

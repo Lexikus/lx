@@ -30,8 +30,13 @@ int index_triangle[] = {
 };
 
 int main() {
-    Window window = {};
-    if(!window.init(TITLE, WIDTH, HEIGHT)) {
+    Window window = {
+        TITLE,
+        WIDTH,
+        HEIGHT
+    };
+
+    if(!window.init()) {
         window.terminate();
         return 1;
     }

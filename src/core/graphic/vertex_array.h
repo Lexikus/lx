@@ -6,6 +6,6 @@ private:
     unsigned int id_ = 0;
 public:
     VertexArray();
-    void bind();
-    void unbind();
+    void bind() const;
+    void unbind() const;
 };

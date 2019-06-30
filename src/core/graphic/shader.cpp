@@ -18,19 +18,19 @@ Shader::Shader(std::string shader_path, ShaderType type) {
     is_valid_ = compile(id_);
 }
 
-bool Shader::is_valid() {
+bool Shader::is_valid() const {
     return is_valid_;
 }
 
-const std::string& Shader::get_error(){
+const std::string& Shader::get_error() const {
     return error_;
 }
 
-int Shader::get_id(){
+int Shader::get_id() const {
     return id_;
 }
 
-void Shader::destroy(){
+void Shader::destroy() const {
     glDeleteShader(id_);
 }
 
@@ -61,7 +61,7 @@ std::string Shader::read_from_file(const std::string &path) {
     }
 }
 
-unsigned int Shader::create(const std::string &code, ShaderType type) {
+unsigned int Shader::create(const std::string &code, ShaderType type) const {
     const char* shader_code = code.c_str();
     unsigned int id = 0;
     switch (type) {

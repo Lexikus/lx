@@ -1,5 +1,7 @@
 #pragma once
 
+#include <glad/glad.h>
+
 enum class BufferDataType {
     None = 0,
     Float,
@@ -17,3 +19,4 @@ enum class BufferDataType {
 
 unsigned int buffer_data_type_size(BufferDataType buffer_data_type);
 unsigned int buffer_data_type_count(BufferDataType buffer_data_type);
+GLenum buffer_data_type_api_type(BufferDataType buffer_data_type);

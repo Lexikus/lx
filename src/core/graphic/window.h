@@ -7,13 +7,17 @@
 
 class Window {
 private:
+    std::string title_;
+    int width_ = 0;
+    int height_ = 0;
     GLFWwindow* window_;
 public:
+    Window(std::string title, int width, int height);
     ~Window();
-    bool init(std::string, int width, int height);
-    const GLFWwindow *const get_window();
-    bool should_close();
-    void set_vsync(bool enable);
-    void on_update();
-    void terminate();
+    bool init();
+    const GLFWwindow *const get_window() const;
+    bool should_close() const;
+    void set_vsync(bool enable) const;
+    void on_update() const;
+    void terminate() const;
 };
