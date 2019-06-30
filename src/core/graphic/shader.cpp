@@ -5,14 +5,16 @@
 #include <sstream>
 #include <string>
 
-Shader::Shader(std::string shader_path) {
+#include "shader_type.h"
+
+Shader::Shader(std::string shader_path, ShaderType type) {
     std::string vertex_shader_code = read_from_file(shader_path);
 
-    if(is_valid_) {
+    if(!is_valid_) {
         return;
     }
 
-    id_ = create(vertex_shader_code);
+    id_ = create(vertex_shader_code, type);
     is_valid_ = compile(id_);
 }
 
@@ -59,9 +61,17 @@ std::string Shader::read_from_file(const std::string &path) {
     }
 }
 
-unsigned int Shader::create(const std::string &code) {
+unsigned int Shader::create(const std::string &code, ShaderType type) {
     const char* shader_code = code.c_str();
-    unsigned int id = glCreateShader(GL_VERTEX_SHADER);
+    unsigned int id = 0;
+    switch (type) {
+        case ShaderType::Vertex:
+            id = glCreateShader(GL_VERTEX_SHADER);
+            break;
+        case ShaderType::Fragment:
+            id = glCreateShader(GL_FRAGMENT_SHADER);
+            break;
+    }
     glShaderSource(id, 1, &shader_code, NULL);
     return id;
 }
@@ -69,8 +79,8 @@ unsigned int Shader::create(const std::string &code) {
 bool Shader::compile(unsigned int id) {
     glCompileShader(id);
 
-    int success;
-    char* infoLog;
+    int success = 0;
+    char infoLog[1024];
 
     glGetShaderiv(id, GL_COMPILE_STATUS, &success);
     if (!success) {
