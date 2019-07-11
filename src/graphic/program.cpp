@@ -18,7 +18,14 @@ Program::Program(std::string vertex_path, std::string fragment_path) {
 Program::Program(Shader& vertex_shader, Shader& fragment_shader) {
     if(!vertex_shader.is_valid() || !fragment_shader.is_valid()){
         is_valid_ = false;
-        error_ = "shaders are not valid";
+        error_ = "Vertex or fragment shader in program is invalid!\n\n";
+        error_ += "VertexShader\n";
+        error_ += "------------\n";
+        error_ += vertex_shader.get_error();
+        error_ += "\n==================================================\n";
+        error_ += "FragmentShader\n";
+        error_ += "--------------\n";
+        error_ += fragment_shader.get_error();
         return;
     }
 

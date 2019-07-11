@@ -51,7 +51,8 @@ std::string Shader::read_from_file(const std::string &path) {
         return shader_stream.str();
     } catch (std::ifstream::failure e) {
         is_valid_ = false;
-        error_ = "shader file could not be read";
+        error_ = "shader file could not be read. Check path: \n";
+        error_ += path;
 
         if(shader_file.is_open()){
             shader_file.close();
@@ -86,7 +87,7 @@ bool Shader::compile(unsigned int id) {
     if (!success) {
         glGetShaderInfoLog(id, 1024, NULL, infoLog);
         error_ = "shader compilation failed: \n";
-        error_.append(infoLog);
+        error_ += infoLog;
 
         return false;
     }
