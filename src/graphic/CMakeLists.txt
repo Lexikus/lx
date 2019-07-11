@@ -9,6 +9,7 @@ target_sources(${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/buffer_element.h ${CMAKE_CURRENT_SOURCE_DIR}/buffer_element.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/data_buffer.h ${CMAKE_CURRENT_SOURCE_DIR}/data_buffer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/index_buffer.h ${CMAKE_CURRENT_SOURCE_DIR}/index_buffer.cpp
+        ${CMAKE_HOME_DIRECTORY}/vendor/stb/stb_image.h
         ${CMAKE_CURRENT_SOURCE_DIR}/texture.h ${CMAKE_CURRENT_SOURCE_DIR}/texture.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/camera_type.h
         ${CMAKE_CURRENT_SOURCE_DIR}/camera.h ${CMAKE_CURRENT_SOURCE_DIR}/camera.cpp

@@ -35,10 +35,3 @@ target_link_libraries(${PROJECT_NAME} glad)
 set(GLM_TEST_ENABLE CACHE BOOL OFF)
 add_subdirectory(${VENDOR_PATH}/glm)
 target_link_libraries(${PROJECT_NAME} glm)
-
-#stb
-target_sources(${PROJECT_NAME}
-    PRIVATE
-        ${VENDOR_PATH}/stb/stb_image.h
-)
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR})
