@@ -5,6 +5,8 @@
 
 #include <GLFW/glfw3.h>
 
+#include "keyboard.h"
+
 Window::Window(std::string title, int width, int height):
 title_ { title }, width_ { width }, height_ { height } { }
 
@@ -26,24 +28,27 @@ bool Window::init() {
         return false;
     }
 
+    glfwSetWindowUserPointer(window_, this);
     glfwMakeContextCurrent(window_);
 
-    // TODO: make this somehow seperate like a EventHandler
-    // callback for closing window
-    // callback for keys
-    // basically, those below should not be here... they should get
-    // an instance of the window to handle that stuff
     glfwSetWindowCloseCallback(window_, [](GLFWwindow* window) {
         glfwSetWindowShouldClose(window, true);
     });
 
     glfwSetKeyCallback(window_,
-        [](GLFWwindow* window, int key, int scancode,int action, int mods) {
+        [](GLFWwindow* window, int key, int scancode, int action, int mods) {
+            if(key == GLFW_KEY_ESCAPE) {
+                glfwSetWindowShouldClose(window, true);
+            }
 
-        if(key == GLFW_KEY_ESCAPE) {
-            glfwSetWindowShouldClose(window, true);
-        }
-    });
+            auto& self = *static_cast<Window*>(glfwGetWindowUserPointer(window));
+            Key _key = get_key_from_keycode(key);
+            Action _action = get_action_from_actioncode(action);
+            Modifier _modifier = get_modifier_from_modifercode(scancode);
+
+            self.input_controller_->update(_key, { _key, _action, _modifier });
+        });
+
 
     return true;
 }
@@ -63,11 +68,18 @@ void Window::set_vsync(bool enable) const {
     glfwSwapInterval(0);
 }
 
-void Window::on_update() const {
-    glfwSwapBuffers(window_);
+void Window::on_update_begin() const {
     glfwPollEvents();
+}
+
+void Window::on_update_end() const {
+    glfwSwapBuffers(window_);
 }
 
 void Window::terminate() const {
     glfwTerminate();
+}
+
+void Window::add_input_controller(std::shared_ptr<Input> input_controller) {
+    input_controller_ = input_controller;
 }

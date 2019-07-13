@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <memory>
 
 #include <glad/glad.h>
 
@@ -7,6 +8,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "core/window.h"
+#include "core/keyboard.h"
+#include "core/input.h"
 
 #include "graphic/program.h"
 #include "graphic/context.h"
@@ -154,6 +157,10 @@ int main() {
         return 1;
     }
 
+    std::shared_ptr<Input> input = std::make_shared<Input>();
+    window.add_input_controller(input);
+
+
     Shader vertex_shader = { "assets/shaders/color_manipulation.vertex.glsl", ShaderType::Vertex };
     Shader fragment_shader = { "assets/shaders/color_manipulation.fragment.glsl", ShaderType::Fragment };
 
@@ -243,6 +250,9 @@ int main() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
     while (!window.should_close()) {
+        window.on_update_begin();
+        float rotate = 0;
+
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -250,7 +260,11 @@ int main() {
 
         float time = float(glfwGetTime());
 
-        model = glm::rotate(model, 0.0001f, glm::vec3(0,1,0));
+        if(input->is_key_pressed(Key::Space)) {
+            rotate = 1;
+        }
+
+        model = glm::rotate(model, rotate, glm::vec3(0,1,0));
         program.set_float("time", time);
         program.set_float("uBrightness", sin(time));
         program.set_float("uContrast", sin(time));
@@ -262,7 +276,7 @@ int main() {
 
         glDrawElements(GL_TRIANGLES, 1000, GL_UNSIGNED_INT, 0);
 
-        window.on_update();
+        window.on_update_end();
     }
 
     window.terminate();
