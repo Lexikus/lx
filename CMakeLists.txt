@@ -19,6 +19,7 @@ add_executable(${PROJECT_NAME}
 # Modules
 add_subdirectory(${SOURCE_PATH}/core)
 add_subdirectory(${SOURCE_PATH}/graphic)
+add_subdirectory(${SOURCE_PATH}/primitives)
 
 # glfw
 # lib requirements for linux: xorg-dev libglu1-mesa-dev

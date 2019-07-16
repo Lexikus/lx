@@ -30,31 +30,37 @@ const short HEIGHT = 800;
 const std::string TITLE = "OPENGL";
 
 glm::vec3 vertices_cube[] = {
+    // forward
     { -1.0f, -1.0f, 1.0f },
     {  1.0f, -1.0f, 1.0f },
     {  1.0f,  1.0f, 1.0f },
     { -1.0f,  1.0f, 1.0f },
 
+    // back
     { -1.0f, -1.0f, -1.0f },
     {  1.0f, -1.0f, -1.0f },
     {  1.0f,  1.0f, -1.0f },
     { -1.0f,  1.0f, -1.0f },
 
+    // right
     {  1.0f, -1.0f,  1.0f },
     {  1.0f, -1.0f, -1.0f },
     {  1.0f,  1.0f, -1.0f },
     {  1.0f,  1.0f,  1.0f },
 
+    // left
     { -1.0f, -1.0f,  1.0f },
     { -1.0f, -1.0f, -1.0f },
     { -1.0f,  1.0f, -1.0f },
     { -1.0f,  1.0f,  1.0f },
 
+    // top
     { -1.0f,  1.0f,  1.0f },
     {  1.0f,  1.0f,  1.0f },
     {  1.0f,  1.0f, -1.0f },
     { -1.0f,  1.0f, -1.0f },
 
+    // bottom
     { -1.0f, -1.0f,  1.0f },
     {  1.0f, -1.0f,  1.0f },
     {  1.0f, -1.0f, -1.0f },
@@ -109,35 +115,73 @@ glm::vec2 uvs_cube[] = {
 };
 
 glm::vec4 color_cube[] = {
-    { 1.0f, 0.0f, 0.0f, 1.0f },
-    { 0.0f, 1.0f, 0.0f, 1.0f },
-    { 0.0f, 0.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
     { 1.0f, 1.0f, 1.0f, 1.0f },
 
-    { 1.0f, 0.0f, 0.0f, 1.0f },
-    { 0.0f, 1.0f, 0.0f, 1.0f },
-    { 0.0f, 0.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
     { 1.0f, 1.0f, 1.0f, 1.0f },
 
-    { 1.0f, 0.0f, 0.0f, 1.0f },
-    { 0.0f, 1.0f, 0.0f, 1.0f },
-    { 0.0f, 0.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
     { 1.0f, 1.0f, 1.0f, 1.0f },
 
-    { 1.0f, 0.0f, 0.0f, 1.0f },
-    { 0.0f, 1.0f, 0.0f, 1.0f },
-    { 0.0f, 0.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
     { 1.0f, 1.0f, 1.0f, 1.0f },
 
-    { 1.0f, 0.0f, 0.0f, 1.0f },
-    { 0.0f, 1.0f, 0.0f, 1.0f },
-    { 0.0f, 0.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
     { 1.0f, 1.0f, 1.0f, 1.0f },
 
-    { 1.0f, 0.0f, 0.0f, 1.0f },
-    { 0.0f, 1.0f, 0.0f, 1.0f },
-    { 0.0f, 0.0f, 1.0f, 1.0f },
     { 1.0f, 1.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
+    { 1.0f, 1.0f, 1.0f, 1.0f },
+};
+
+glm::vec3 normal_cube[] = {
+    // forward
+    {  0.0f,  0.0f, 1.0f },
+    {  0.0f,  0.0f, 1.0f },
+    {  0.0f,  0.0f, 1.0f },
+    {  0.0f,  0.0f, 1.0f },
+
+    // back
+    {  0.0f,  0.0f, -1.0f },
+    {  0.0f,  0.0f, -1.0f },
+    {  0.0f,  0.0f, -1.0f },
+    {  0.0f,  0.0f, -1.0f },
+
+    // right
+    {  1.0f,  0.0f,  0.0f },
+    {  1.0f,  0.0f,  0.0f },
+    {  1.0f,  0.0f,  0.0f },
+    {  1.0f,  0.0f,  0.0f },
+
+    // left
+    { -1.0f,  0.0f,  0.0f },
+    { -1.0f,  0.0f,  0.0f },
+    { -1.0f,  0.0f,  0.0f },
+    { -1.0f,  0.0f,  0.0f },
+
+    // top
+    {  0.0f,  1.0f,  0.0f },
+    {  0.0f,  1.0f,  0.0f },
+    {  0.0f,  1.0f,  0.0f },
+    {  0.0f,  1.0f,  0.0f },
+
+    // bottom
+    {  0.0f, -1.0f,  0.0f },
+    {  0.0f, -1.0f,  0.0f },
+    {  0.0f, -1.0f,  0.0f },
+    {  0.0f, -1.0f,  0.0f },
 };
 
 int main() {
@@ -162,8 +206,8 @@ int main() {
     window.add_input_controller(input);
 
 
-    Shader vertex_shader = { "assets/shaders/color_manipulation.vertex.glsl", ShaderType::Vertex };
-    Shader fragment_shader = { "assets/shaders/color_manipulation.fragment.glsl", ShaderType::Fragment };
+    Shader vertex_shader = { "assets/shaders/light.vertex.glsl", ShaderType::Vertex };
+    Shader fragment_shader = { "assets/shaders/light.fragment.glsl", ShaderType::Fragment };
 
     Program program = {
         vertex_shader,
@@ -172,6 +216,7 @@ int main() {
 
     if(!program.is_valid()) {
         std::cout << program.get_error() << std::endl;
+        std::cin.get();
         window.terminate();
         return 1;
     }
@@ -194,6 +239,11 @@ int main() {
         sizeof(color_cube)
     };
 
+    DataBuffer data_buffer_normal = {
+        normal_cube,
+        sizeof(normal_cube)
+    };
+
     BufferElement buffer_element_position = {
         BufferDataType::Float3,
         "aPos"
@@ -209,6 +259,11 @@ int main() {
         "aCol"
     };
 
+    BufferElement buffer_element_normal = {
+        BufferDataType::Float3,
+        "aNor"
+    };
+
     data_buffer_position.add_element(buffer_element_position);
     data_buffer_position.configure_by_name(program.get_id());
 
@@ -217,6 +272,9 @@ int main() {
 
     data_buffer_color.add_element(buffer_element_color);
     data_buffer_color.configure_by_name(program.get_id());
+
+    data_buffer_normal.add_element(buffer_element_normal);
+    data_buffer_normal.configure_by_name(program.get_id());
 
     IndexBuffer index_buffer = {
         indices_cube,
@@ -261,7 +319,7 @@ int main() {
 
         float time = float(glfwGetTime());
 
-        if(input->is_key_pressed_down(Key::Space)) {
+        if(input->is_key_pressed(Key::Space)) {
             rotate = 1;
         }
 
@@ -281,6 +339,5 @@ int main() {
     }
 
     window.terminate();
-
     return 0;
 }
