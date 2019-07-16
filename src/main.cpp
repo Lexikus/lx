@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include <cmath>
 
 #include <glad/glad.h>
 
@@ -260,15 +261,15 @@ int main() {
 
         float time = float(glfwGetTime());
 
-        if(input->is_key_pressed(Key::Space)) {
+        if(input->is_key_pressed_down(Key::Space)) {
             rotate = 1;
         }
 
         model = glm::rotate(model, rotate, glm::vec3(0,1,0));
         program.set_float("time", time);
-        program.set_float("uBrightness", sin(time));
-        program.set_float("uContrast", sin(time));
-        program.set_float("uGrayscale", fabsf32(sin(time)));
+        program.set_float("uBrightness", std::sinf(time));
+        program.set_float("uContrast", std::sinf(time));
+        program.set_float("uGrayscale", std::fabs(std::sinf(time)));
 
         program.set_mat4("model", model);
 
