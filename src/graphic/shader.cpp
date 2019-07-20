@@ -8,7 +8,7 @@
 #include "shader_type.h"
 
 Shader::Shader(std::string shader_path, ShaderType type) {
-    std::string vertex_shader_code = read_from_file(shader_path);
+    std::string vertex_shader_code { read_from_file(shader_path) };
 
     if(!is_valid_) {
         return;
@@ -63,8 +63,8 @@ std::string Shader::read_from_file(const std::string &path) {
 }
 
 unsigned int Shader::create(const std::string &code, ShaderType type) const {
-    const char* shader_code = code.c_str();
-    unsigned int id = 0;
+    const char* shader_code { code.c_str() };
+    unsigned int id { 0 };
     switch (type) {
         case ShaderType::Vertex:
             id = glCreateShader(GL_VERTEX_SHADER);
@@ -80,8 +80,8 @@ unsigned int Shader::create(const std::string &code, ShaderType type) const {
 bool Shader::compile(unsigned int id) {
     glCompileShader(id);
 
-    int success = 0;
-    char infoLog[1024];
+    int success { 0 };
+    char infoLog[1024] { };
 
     glGetShaderiv(id, GL_COMPILE_STATUS, &success);
     if (!success) {

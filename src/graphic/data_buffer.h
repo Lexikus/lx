@@ -6,9 +6,9 @@
 
 class DataBuffer {
 private:
-    unsigned int id_ = 0;
-    int stride_ = 0;
-    std::vector<BufferElement> layouts_ = {};
+    unsigned int id_ { 0 };
+    int stride_ { 0 };
+    std::vector<BufferElement> layouts_ { };
 public:
     DataBuffer(const void* const data, size_t size);
     void bind() const;

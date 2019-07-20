@@ -28,8 +28,8 @@ void DataBuffer::add_element(BufferElement buffer_element) {
 void DataBuffer::configure_by_index() const {
     glBindBuffer(GL_ARRAY_BUFFER, id_);
 
-    unsigned int layout_position = 0;
-    unsigned int offset = 0;
+    unsigned int layout_position { 0 };
+    unsigned int offset { 0 };
 
     for (const BufferElement& element : layouts_) {
         glVertexAttribPointer(
@@ -50,10 +50,10 @@ void DataBuffer::configure_by_index() const {
 void DataBuffer::configure_by_name(unsigned int program_id) const {
     glBindBuffer(GL_ARRAY_BUFFER, id_);
 
-    unsigned int offset = 0;
+    unsigned int offset { 0 };
 
     for (const BufferElement& element : layouts_) {
-        unsigned int position = glGetAttribLocation(program_id, element.get_name().c_str());
+        int position { glGetAttribLocation(program_id, element.get_name().c_str()) };
         glVertexAttribPointer(
             position,
             element.get_count(),

@@ -22,12 +22,12 @@
 #include "primitives/cube.h"
 
 // settings
-const short WIDTH = 1600;
-const short HEIGHT = 800;
-const std::string TITLE = "OPENGL";
+const short WIDTH { 1600 };
+const short HEIGHT { 800 };
+const std::string TITLE { "OPENGL" };
 
 int main() {
-    Window window = {
+    Window window {
         TITLE,
         WIDTH,
         HEIGHT
@@ -38,7 +38,8 @@ int main() {
         return 1;
     }
 
-    Context context = {};
+    Context context { };
+
     if (!context.init()) {
         window.terminate();
         return 1;
@@ -47,10 +48,10 @@ int main() {
     std::shared_ptr<Input> input = std::make_shared<Input>();
     window.add_input_controller(input);
 
-    Shader vertex_shader = { "assets/shaders/light.vertex.glsl", ShaderType::Vertex };
-    Shader fragment_shader = { "assets/shaders/light.fragment.glsl", ShaderType::Fragment };
+    Shader vertex_shader { "assets/shaders/light.vertex.glsl", ShaderType::Vertex };
+    Shader fragment_shader { "assets/shaders/light.fragment.glsl", ShaderType::Fragment };
 
-    Program program = {
+    Program program {
         vertex_shader,
         fragment_shader,
     };
@@ -62,9 +63,9 @@ int main() {
         return 1;
     }
 
-    Cube cube = {};
+    Cube cube { };
 
-    glm::mat4 model = glm::mat4(1.0f);
+    glm::mat4 model { 1.0f };
 
     Camera camera;
     camera.create_perspective(45.0f, (float)WIDTH/HEIGHT, 0.1f, 1000.0f);
@@ -77,7 +78,7 @@ int main() {
     model = glm::rotate(model, 45.0f, glm::vec3(0,1,0));
     model = glm::scale(model, glm::vec3(1, 1, 1));
 
-    Texture texture = {
+    Texture texture {
         "assets/textures/crate.jpg"
     };
     texture.bind();
@@ -93,14 +94,14 @@ int main() {
 
     while (!window.should_close()) {
         window.on_update_begin();
-        float rotate = 0;
+        float rotate { 0 };
 
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         program.bind();
 
-        float time = float(glfwGetTime());
+        float time { float(glfwGetTime()) };
 
         if(input->is_key_pressed(Key::Space)) {
             rotate = 1;

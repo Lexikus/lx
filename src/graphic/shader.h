@@ -8,9 +8,9 @@
 
 class Shader {
 private:
-    unsigned int id_ = 0;
-    std::string error_;
-    bool is_valid_ = true;
+    unsigned int id_ { 0 };
+    std::string error_ { };
+    bool is_valid_ { true };
 public:
     Shader(std::string shader_path, ShaderType type);
     bool is_valid() const;

@@ -41,10 +41,10 @@ bool Window::init() {
                 glfwSetWindowShouldClose(window, true);
             }
 
-            auto& self = *static_cast<Window*>(glfwGetWindowUserPointer(window));
-            Key _key = get_key_from_keycode(key);
-            Action _action = get_action_from_actioncode(action);
-            Modifier _modifier = get_modifier_from_modifercode(scancode);
+            auto& self { *static_cast<Window*>(glfwGetWindowUserPointer(window)) };
+            Key _key { get_key_from_keycode(key) };
+            Action _action { get_action_from_actioncode(action) };
+            Modifier _modifier { get_modifier_from_modifercode(scancode) };
 
             self.input_controller_->update(_key, { _key, _action, _modifier });
         });

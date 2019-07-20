@@ -141,9 +141,9 @@ enum class Modifier {
 };
 
 struct State {
-    Key key = Key::Unknown;
-    Action action = Action::Release;
-    Modifier modifier = Modifier::Unknown;
+    Key key { Key::Unknown };
+    Action action { Action::Release };
+    Modifier modifier { Modifier::Unknown };
 
     State() = default;
     State(Key key, Action action, Modifier modifier);

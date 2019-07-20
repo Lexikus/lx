@@ -7,7 +7,7 @@
 class Input {
 friend class Window;
 private:
-    std::map<Key, State> input_states_ = {};
+    std::map<Key, State> input_states_ { };
     void update(const Key key, const State state);
 public:
     Input();

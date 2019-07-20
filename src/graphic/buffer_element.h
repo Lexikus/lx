@@ -9,10 +9,10 @@
 class BufferElement {
 private:
     std::string name_;
-    int32_t size_ = 0;
-    unsigned int count_ = 0;
-    GLenum type_ = 0;
-    bool normalized_ = false;
+    int32_t size_ { 0 };
+    unsigned int count_ { 0 };
+    GLenum type_ { 0 };
+    bool normalized_ { false };
 public:
     BufferElement(BufferDataType type, std::string name, bool normalized = false);
     const std::string& get_name() const;

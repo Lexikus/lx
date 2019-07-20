@@ -8,11 +8,11 @@
 #include "../../vendor/stb/stb_image.h"
 
 Texture::Texture(std::string path) {
-    int width = 0;
-    int height = 0;
-    int nrChannels = 0;
+    int width { 0 };
+    int height { 0 };
+    int nrChannels { 0 };
 
-    unsigned char *pixel_data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
+    unsigned char *pixel_data { stbi_load(path.c_str(), &width, &height, &nrChannels, 0) };
 
     glGenTextures(1, &id_);
     glBindTexture(GL_TEXTURE_2D, id_);

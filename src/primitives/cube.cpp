@@ -12,23 +12,23 @@ Cube::Cube() {
     vertex_array_ = std::make_unique<VertexArray>();
     vertex_array_->bind();
 
-    data_buffer_ = std::make_unique<DataBuffer>(data_, sizeof(data_));
-    BufferElement buffer_element_position = {
+    data_buffer_ = std::make_unique<DataBuffer>(data_.data(), sizeof(data_));
+    BufferElement buffer_element_position {
         BufferDataType::Float3,
         "aPos"
     };
 
-    BufferElement buffer_element_normal = {
+    BufferElement buffer_element_normal {
         BufferDataType::Float3,
         "aNor"
     };
 
-    BufferElement buffer_element_uv = {
+    BufferElement buffer_element_uv {
         BufferDataType::Float2,
         "aUV"
     };
 
-    BufferElement buffer_element_color = {
+    BufferElement buffer_element_color {
         BufferDataType::Float4,
         "aCol"
     };
@@ -39,7 +39,7 @@ Cube::Cube() {
     data_buffer_->add_element(buffer_element_color);
     data_buffer_->configure_by_index();
 
-    index_buffer_ = std::make_unique<IndexBuffer>(indices_, sizeof(indices_));
+    index_buffer_ = std::make_unique<IndexBuffer>(indices_.data(), sizeof(indices_));
     vertex_array_->unbind();
 }
 

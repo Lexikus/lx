@@ -10,11 +10,11 @@
 class Window {
 friend GLFWwindow;
 private:
-    std::string title_;
-    int width_ = 0;
-    int height_ = 0;
-    GLFWwindow* window_;
-    std::shared_ptr<Input> input_controller_;
+    std::string title_ { };
+    int width_ { 0 };
+    int height_ { 0 };
+    GLFWwindow* window_ { };
+    std::shared_ptr<Input> input_controller_ { };
 public:
     Window(std::string title, int width, int height);
     ~Window();

@@ -9,8 +9,8 @@
 #include "shader_type.h"
 
 Program::Program(std::string vertex_path, std::string fragment_path) {
-    Shader vertex_shader = { vertex_path, ShaderType::Vertex };
-    Shader fragment_shader = { fragment_path, ShaderType::Fragment };
+    Shader vertex_shader { vertex_path, ShaderType::Vertex };
+    Shader fragment_shader { fragment_path, ShaderType::Fragment };
 
     Program(vertex_shader, fragment_shader);
 }
@@ -46,8 +46,8 @@ bool Program::compile(Shader& vertex_shader, Shader& fragment_shader) {
     glAttachShader(id_, fragment_shader.get_id());
     glLinkProgram(id_);
 
-    int success = 0;
-    char infoLog[1024];
+    int success { 0 };
+    char infoLog[1024] { };
 
     glGetProgramiv(id_, GL_LINK_STATUS, &success);
     if (!success) {

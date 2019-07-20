@@ -3,7 +3,7 @@
 class VertexArray
 {
 private:
-    unsigned int id_ = 0;
+    unsigned int id_ { 0 };
 public:
     VertexArray();
     void bind() const;

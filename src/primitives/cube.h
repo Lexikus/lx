@@ -12,7 +12,7 @@ private:
     std::unique_ptr<VertexArray> vertex_array_;
     std::unique_ptr<DataBuffer> data_buffer_;
     std::unique_ptr<IndexBuffer> index_buffer_;
-    float data_[288] {
+    std::array<float, 288> data_ {
         //=======verices====    ======normals======   =====uv====   ===========color=======
         // forward
         -1.0f, -1.0f,  1.0f,    0.0f,  0.0f,  1.0f,   0.0f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,
@@ -46,7 +46,7 @@ private:
         -1.0f, -1.0f, -1.0f,    0.0f, -1.0f,  0.0f,   0.0f, 1.0f,   1.0f, 1.0f, 1.0f, 1.0f,
         //=======verices====    ======normals======   =====uv====   ===========color=======
     };
-    int indices_[36] = {
+    std::array<int, 36> indices_ {
         0, 1, 2,
         0, 2, 3,
         8, 9, 10,
