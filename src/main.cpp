@@ -106,11 +106,11 @@ int main() {
             rotate = 1;
         }
 
-        model = glm::rotate(model, rotate, glm::vec3(0,1,0));
+        model = glm::rotate(model, time * 0.0001f, glm::vec3(0,1,0));
         program.set_float("time", time);
-        program.set_float("uBrightness", std::sinf(time));
-        program.set_float("uContrast", std::sinf(time));
-        program.set_float("uGrayscale", std::fabs(std::sinf(time)));
+        program.set_float("uBrightness", static_cast<float>(sin(time)));
+        program.set_float("uContrast", static_cast<float>(sin(time)));
+        program.set_float("uGrayscale", static_cast<float>(abs(sin(time))));
 
         program.set_mat4("model", model);
 
