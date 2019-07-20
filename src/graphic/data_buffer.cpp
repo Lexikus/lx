@@ -6,7 +6,7 @@
 
 #include "buffer_element.h"
 
-DataBuffer::DataBuffer(const void* const data, unsigned int size) {
+DataBuffer::DataBuffer(const void* const data, size_t size) {
     glGenBuffers(1, &id_);
     glBindBuffer(GL_ARRAY_BUFFER, id_);
     glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);

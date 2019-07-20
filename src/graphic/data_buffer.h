@@ -10,7 +10,7 @@ private:
     int stride_ = 0;
     std::vector<BufferElement> layouts_ = {};
 public:
-    DataBuffer(const void* const data, unsigned int size);
+    DataBuffer(const void* const data, size_t size);
     void bind() const;
     void unbind() const;
     void add_element(BufferElement buffer_element);

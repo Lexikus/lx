@@ -2,7 +2,7 @@
 
 #include <glad/glad.h>
 
-IndexBuffer::IndexBuffer(const void* const data, unsigned int size) {
+IndexBuffer::IndexBuffer(const void* const data, size_t size) {
     glGenBuffers(1, &id_);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);

@@ -1,9 +1,8 @@
 #pragma once
 
-#include <glm/glm.hpp>
 #include <memory>
+#include <array>
 
-#include "primitive.h"
 #include "../graphic/vertex_array.h"
 #include "../graphic/data_buffer.h"
 #include "../graphic/index_buffer.h"
@@ -11,14 +10,59 @@
 class Cube {
 private:
     std::unique_ptr<VertexArray> vertex_array_;
-    std::shared_ptr<DataBuffer> data_buffer_;
-    std::shared_ptr<IndexBuffer> index_buffer_;
-    glm::vec3 vertices_cube_[24];
-    glm::ivec3 indices_cube_[12];
-    glm::vec2 uvs_cube_[24];
-    glm::vec4 color_cube_[24];
+    std::unique_ptr<DataBuffer> data_buffer_;
+    std::unique_ptr<IndexBuffer> index_buffer_;
+    float data_[288] {
+        //=======verices====    ======normals======   =====uv====   ===========color=======
+        // forward
+        -1.0f, -1.0f,  1.0f,    0.0f,  0.0f,  1.0f,   0.0f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+         1.0f, -1.0f,  1.0f,    0.0f,  0.0f,  1.0f,   1.0f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+         1.0f,  1.0f,  1.0f,    0.0f,  0.0f,  1.0f,   1.0f, 1.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+        -1.0f,  1.0f,  1.0f,    0.0f,  0.0f,  1.0f,   0.0f, 1.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+        // back
+        -1.0f, -1.0f, -1.0f,    0.0f,  0.0f, -1.0f,   0.0f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+         1.0f, -1.0f, -1.0f,    0.0f,  0.0f, -1.0f,   1.0f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+         1.0f,  1.0f, -1.0f,    0.0f,  0.0f, -1.0f,   1.0f, 1.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+        -1.0f,  1.0f, -1.0f,    0.0f,  0.0f, -1.0f,   0.0f, 1.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+        // right
+         1.0f, -1.0f,  1.0f,    1.0f,  0.0f,  0.0f,   0.0f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+         1.0f, -1.0f, -1.0f,    1.0f,  0.0f,  0.0f,   1.0f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+         1.0f,  1.0f, -1.0f,    1.0f,  0.0f,  0.0f,   1.0f, 1.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+         1.0f,  1.0f,  1.0f,    1.0f,  0.0f,  0.0f,   0.0f, 1.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+        // left
+        -1.0f, -1.0f,  1.0f,   -1.0f,  0.0f,  0.0f,   0.0f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+        -1.0f, -1.0f, -1.0f,   -1.0f,  0.0f,  0.0f,   1.0f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+        -1.0f,  1.0f, -1.0f,   -1.0f,  0.0f,  0.0f,   1.0f, 1.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+        -1.0f,  1.0f,  1.0f,   -1.0f,  0.0f,  0.0f,   0.0f, 1.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+        // top
+        -1.0f,  1.0f,  1.0f,    0.0f,  1.0f,  0.0f,   0.0f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+         1.0f,  1.0f,  1.0f,    0.0f,  1.0f,  0.0f,   1.0f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+         1.0f,  1.0f, -1.0f,    0.0f,  1.0f,  0.0f,   1.0f, 1.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+        -1.0f,  1.0f, -1.0f,    0.0f,  1.0f,  0.0f,   0.0f, 1.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+        // bottom
+        -1.0f, -1.0f,  1.0f,    0.0f, -1.0f,  0.0f,   0.0f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+         1.0f, -1.0f,  1.0f,    0.0f, -1.0f,  0.0f,   1.0f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+         1.0f, -1.0f, -1.0f,    0.0f, -1.0f,  0.0f,   1.0f, 1.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+        -1.0f, -1.0f, -1.0f,    0.0f, -1.0f,  0.0f,   0.0f, 1.0f,   1.0f, 1.0f, 1.0f, 1.0f,
+        //=======verices====    ======normals======   =====uv====   ===========color=======
+    };
+    int indices_[36] = {
+        0, 1, 2,
+        0, 2, 3,
+        8, 9, 10,
+        8, 10, 11,
+        5, 4, 7,
+        5, 7, 6,
+        13, 12, 15,
+        13, 15, 14,
+        16, 17, 18,
+        16, 18, 19,
+        21, 20, 23,
+        21, 23, 22,
+    };
 public:
     Cube();
+    ~Cube() = default;
     void bind();
     void unbind();
 };

@@ -11,118 +11,42 @@
 Cube::Cube() {
     vertex_array_ = std::make_unique<VertexArray>();
     vertex_array_->bind();
-    data_buffer_ = std::make_shared<DataBuffer>();
 
-    glm::vec3 vertices_cube_[] = {
-        { -1.0f, -1.0f, 1.0f },
-        {  1.0f, -1.0f, 1.0f },
-        {  1.0f,  1.0f, 1.0f },
-        { -1.0f,  1.0f, 1.0f },
-
-        { -1.0f, -1.0f, -1.0f },
-        {  1.0f, -1.0f, -1.0f },
-        {  1.0f,  1.0f, -1.0f },
-        { -1.0f,  1.0f, -1.0f },
-
-        {  1.0f, -1.0f,  1.0f },
-        {  1.0f, -1.0f, -1.0f },
-        {  1.0f,  1.0f, -1.0f },
-        {  1.0f,  1.0f,  1.0f },
-
-        { -1.0f, -1.0f,  1.0f },
-        { -1.0f, -1.0f, -1.0f },
-        { -1.0f,  1.0f, -1.0f },
-        { -1.0f,  1.0f,  1.0f },
-
-        { -1.0f,  1.0f,  1.0f },
-        {  1.0f,  1.0f,  1.0f },
-        {  1.0f,  1.0f, -1.0f },
-        { -1.0f,  1.0f, -1.0f },
-
-        { -1.0f, -1.0f,  1.0f },
-        {  1.0f, -1.0f,  1.0f },
-        {  1.0f, -1.0f, -1.0f },
-        { -1.0f, -1.0f, -1.0f },
+    data_buffer_ = std::make_unique<DataBuffer>(data_, sizeof(data_));
+    BufferElement buffer_element_position = {
+        BufferDataType::Float3,
+        "aPos"
     };
 
-    glm::vec2 uvs_cube_[] = {
-        { 0.0f, 0.0f },
-        { 1.0f, 0.0f },
-        { 1.0f, 1.0f },
-        { 0.0f, 1.0f },
-
-        { 0.0f, 0.0f },
-        { 1.0f, 0.0f },
-        { 1.0f, 1.0f },
-        { 0.0f, 1.0f },
-
-        { 0.0f, 0.0f },
-        { 1.0f, 0.0f },
-        { 1.0f, 1.0f },
-        { 0.0f, 1.0f },
-
-        { 0.0f, 0.0f },
-        { 1.0f, 0.0f },
-        { 1.0f, 1.0f },
-        { 0.0f, 1.0f },
-
-        { 0.0f, 0.0f },
-        { 1.0f, 0.0f },
-        { 1.0f, 1.0f },
-        { 0.0f, 1.0f },
-
-        { 0.0f, 0.0f },
-        { 1.0f, 0.0f },
-        { 1.0f, 1.0f },
-        { 0.0f, 1.0f },
+    BufferElement buffer_element_normal = {
+        BufferDataType::Float3,
+        "aNor"
     };
 
-    glm::vec4 color_cube_[] = {
-        { 1.0f, 0.0f, 0.0f, 1.0f },
-        { 0.0f, 1.0f, 0.0f, 1.0f },
-        { 0.0f, 0.0f, 1.0f, 1.0f },
-        { 1.0f, 1.0f, 1.0f, 1.0f },
-
-        { 1.0f, 0.0f, 0.0f, 1.0f },
-        { 0.0f, 1.0f, 0.0f, 1.0f },
-        { 0.0f, 0.0f, 1.0f, 1.0f },
-        { 1.0f, 1.0f, 1.0f, 1.0f },
-
-        { 1.0f, 0.0f, 0.0f, 1.0f },
-        { 0.0f, 1.0f, 0.0f, 1.0f },
-        { 0.0f, 0.0f, 1.0f, 1.0f },
-        { 1.0f, 1.0f, 1.0f, 1.0f },
-
-        { 1.0f, 0.0f, 0.0f, 1.0f },
-        { 0.0f, 1.0f, 0.0f, 1.0f },
-        { 0.0f, 0.0f, 1.0f, 1.0f },
-        { 1.0f, 1.0f, 1.0f, 1.0f },
-
-        { 1.0f, 0.0f, 0.0f, 1.0f },
-        { 0.0f, 1.0f, 0.0f, 1.0f },
-        { 0.0f, 0.0f, 1.0f, 1.0f },
-        { 1.0f, 1.0f, 1.0f, 1.0f },
-
-        { 1.0f, 0.0f, 0.0f, 1.0f },
-        { 0.0f, 1.0f, 0.0f, 1.0f },
-        { 0.0f, 0.0f, 1.0f, 1.0f },
-        { 1.0f, 1.0f, 1.0f, 1.0f },
+    BufferElement buffer_element_uv = {
+        BufferDataType::Float2,
+        "aUV"
     };
 
-    // DataBuffer
-
-    glm::ivec3 indices_cube_[] = {
-        { 0, 1, 2 },
-        { 0, 2, 3 },
-        { 8, 9, 10 },
-        { 8, 10, 11 },
-        { 5, 4, 7 },
-        { 5, 7, 6 },
-        { 13, 12, 15 },
-        { 13, 15, 14 },
-        { 16, 17, 18 },
-        { 16, 18, 19 },
-        { 21, 20, 23 },
-        { 21, 23, 22},
+    BufferElement buffer_element_color = {
+        BufferDataType::Float4,
+        "aCol"
     };
+
+    data_buffer_->add_element(buffer_element_position);
+    data_buffer_->add_element(buffer_element_normal);
+    data_buffer_->add_element(buffer_element_uv);
+    data_buffer_->add_element(buffer_element_color);
+    data_buffer_->configure_by_index();
+
+    index_buffer_ = std::make_unique<IndexBuffer>(indices_, sizeof(indices_));
+    vertex_array_->unbind();
+}
+
+void Cube::bind() {
+    vertex_array_->bind();
+}
+
+void Cube::unbind() {
+    vertex_array_->unbind();
 }
