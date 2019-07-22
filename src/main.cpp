@@ -48,8 +48,8 @@ int main() {
     std::shared_ptr<Input> input = std::make_shared<Input>();
     window.add_input_controller(input);
 
-    Shader vertex_shader { "assets/shaders/light.vertex.glsl", ShaderType::Vertex };
-    Shader fragment_shader { "assets/shaders/light.fragment.glsl", ShaderType::Fragment };
+    Shader vertex_shader { "assets/shaders/point_light.vertex.glsl", ShaderType::Vertex };
+    Shader fragment_shader { "assets/shaders/point_light.fragment.glsl", ShaderType::Fragment };
 
     Program program {
         vertex_shader,
@@ -83,6 +83,16 @@ int main() {
     };
     texture.bind();
 
+    glm::mat4 lights { 0.0f };
+    // ===========lightPosition=====  ambientIntensity
+    lights[0] = { 0.0f,  1.0f,  1.0f,  0.5f };
+    // ===========ambientLightColor=  diffuseIntensity
+    lights[1] = { 0.75f, 0.75f, 1.0f,  0.8f };
+    // ===========lightColor========  specularIntensity
+    lights[2] = { 0.75f, 0.75f, 1.0f,  1.0f };
+    // ===========viewPosition======  hardness
+    lights[3] = { 0.0f,  0.0f,  0.0f, 64.0f };
+
     // Settings
     glEnable(GL_DEPTH_TEST);
 
@@ -94,7 +104,8 @@ int main() {
 
     while (!window.should_close()) {
         window.on_update_begin();
-        float rotate { 0 };
+        float x_rotate { 0 };
+        float y_rotate { 0 };
 
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -103,17 +114,29 @@ int main() {
 
         float time { float(glfwGetTime()) };
 
-        if(input->is_key_pressed(Key::Space)) {
-            rotate = 1;
+        if(input->is_key_pressed_down(Key::A)) {
+            x_rotate = 0.001f;
+        } else if(input->is_key_pressed_down(Key::D)) {
+            x_rotate = -0.001f;
         }
 
-        model = glm::rotate(model, time * 0.0001f, glm::vec3(0,1,0));
+        if(input->is_key_pressed_down(Key::W)) {
+            y_rotate = 0.001f;
+        } else if(input->is_key_pressed_down(Key::S)) {
+            y_rotate = -0.001f;
+        }
+
+        model = glm::rotate(model, x_rotate, glm::vec3(0,1,0));
+        model = glm::rotate(model, y_rotate, glm::vec3(0,0,1));
         program.set_float("time", time);
         program.set_float("uBrightness", static_cast<float>(sin(time)));
         program.set_float("uContrast", static_cast<float>(sin(time)));
         program.set_float("uGrayscale", static_cast<float>(abs(sin(time))));
 
         program.set_mat4("model", model);
+        program.set_mat4("uLights", lights);
+        glm::mat4 tangentWorld { glm::transpose(glm::inverse(model)) };
+        program.set_mat4("uTangentToWorld", tangentWorld);
 
         cube.bind();
 

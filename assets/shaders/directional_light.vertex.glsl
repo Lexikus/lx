@@ -12,6 +12,7 @@ layout (location = 3) in vec4 aCol;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
+uniform mat4 uTangentToWorld;
 
 out vec4 vCol;
 out vec2 vUV;
@@ -24,6 +25,6 @@ void main() {
     vUV = aUV;
     vNor = aNor;
     vPos = (model * vec4(aPos, 1.0f)).xyz;
-    vNormalWorldSpace = (transpose(inverse(model)) * vec4(aNor, 0.0f)).xyz;
+    vNormalWorldSpace = mat3(uTangentToWorld) * aNor;
     gl_Position = projection * view * model * vec4(aPos, 1.0f);
 }
